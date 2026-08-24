@@ -12,7 +12,7 @@ class Input
 
   def load_employees
     csv_reader = CsvReader.new
-    csv_reader.read_in_csv_data(file_name)
+    csv_reader.read_csv_data(file_name)
     self.employees = csv_reader.employees
   end
 end

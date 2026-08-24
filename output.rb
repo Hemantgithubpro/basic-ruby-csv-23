@@ -14,7 +14,7 @@ class Output
   def write # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     grouped_employees = employees.group_by(&:designation)
 
-    File.open(@file_name, 'w') do |file|
+    File.open(file_name, 'w') do |file|
       grouped_employees.keys.sort.each_with_index do |designation, index|
         employees = grouped_employees[designation].sort_by { |employee| employee.emp_id.to_i }
         label = employees.length > 1 ? "#{designation}s" : designation

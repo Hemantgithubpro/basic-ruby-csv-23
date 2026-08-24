@@ -11,7 +11,7 @@ class CsvReader
     @employees = []
   end
 
-  def read_in_csv_data(csv_file_name) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity
+  def read_csv_data(csv_file_name) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity
     # using CSV.parse
     file_data = File.read(csv_file_name)
     csv_data = CSV.parse(file_data, headers: true, skip_blanks: true)

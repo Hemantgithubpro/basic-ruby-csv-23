@@ -66,7 +66,5 @@ end
 input_file = ARGV[0] || 'file.csv'
 output_file = ARGV[1] || 'output.txt'
 
-employee_data = ReadFile.new(input_file)
-employee_data.load_employees
-
-WriteFile.new(employee_data.employees, output_file).write_to_file
+employees = ReadFile.new(input_file).load_employees
+WriteFile.new(employees, output_file).write_to_file

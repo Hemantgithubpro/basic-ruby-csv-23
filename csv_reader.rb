@@ -2,7 +2,7 @@
 
 require 'csv'
 
-# Reopen the built-in CSV class to add a custom CSV-parsing method
+# CSV class
 class CSV
   def self.read_csv_file(file_name)
     rows = []

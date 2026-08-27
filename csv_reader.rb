@@ -12,9 +12,6 @@ class CSV
       emp_id = row['EmpId']&.strip
       designation = row['Designation']&.strip
 
-      next if name.nil? || emp_id.nil? || designation.nil?
-
-      # rows << { 'Name' => name, 'EmpId' => emp_id, 'Designation' => designation }
       rows << { name: name, emp_id: emp_id, designation: designation }
     end
 

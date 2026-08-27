@@ -19,33 +19,11 @@ class Employee
   def self.from_row(row)
     new(row[:name], row[:emp_id], row[:designation])
   end
-end
 
-# ReadFile class
-class ReadFile
-  attr_accessor :file_name, :employees
-
-  def initialize(file_name)
-    @file_name = file_name
-    @employees = []
-  end
-
-  def load_employees
-    self.employees = CSV.read_csv_file(file_name).map { |row| Employee.from_row(row) }
-  end
-end
-
-# WriteFile class
-class WriteFile
-  attr_accessor :employees, :file_name
-
-  def initialize(employees, file_name)
-    @employees = employees
-    @file_name = file_name
-  end
-
-  def write_to_file # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def self.write_to_file(employees, file_name) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     employees_by_designation = employees.group_by(&:designation)
+    # employees_by_designation is a hash where the keys are designations and the values are arrays of Employee objects.
+    # { "Developer" => [emp_obj, ...]}
 
     File.open(file_name, 'w') do |output_file|
       employees_by_designation.keys.sort.each_with_index do |designation, designation_index|
@@ -66,5 +44,7 @@ end
 input_file = ARGV[0] || 'file.csv'
 output_file = ARGV[1] || 'output.txt'
 
-employees = ReadFile.new(input_file).load_employees
-WriteFile.new(employees, output_file).write_to_file
+employees = CSV.read_csv_file(input_file).map { |row| Employee.from_row(row) }
+# read_csv_file returns an array of Hashes, {:name, :emp_id, :designation}
+# employees is an array of Employee objects, each with a name, emp_id, and designation, [Employee, Employee, ...]
+Employee.write_to_file(employees, output_file)
